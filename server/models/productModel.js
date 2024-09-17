@@ -4,6 +4,11 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  author: {
+    type: String,
+    required: true,
+  },
+
   slug: {
     type: String,
     lowercase:true,
@@ -25,6 +30,10 @@ const productSchema = new mongoose.Schema({
    type:Number,
    required:true
   },
+  pagenumber:{
+    type:Number,
+    required:true
+   },
   photo:{
     data: Buffer,
     contentType:String

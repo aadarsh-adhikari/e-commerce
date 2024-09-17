@@ -14,6 +14,11 @@ import Createproduct from './page/admin/Createproduct';
 import Users from './page/admin/Users';
 import Profile from './page/user/Profile';
 import Orders from './page/user/Orders';
+import Product from './page/admin/Product';
+import Updateproduct from './page/admin/Updateproduct';
+import Category from './page/Category';
+import Newarrival from './page/Newarrival';
+import Authorbook from './page/Authorbook';
 const App = () => {
   return (
     <>
@@ -28,12 +33,17 @@ const App = () => {
         <Route path="/dashboard" element={<Admin />}>
           <Route path="admin" element={<Admindashboard />} />
           <Route path="admin/category" element={<Createcatogory />} />
-          <Route path="admin/product" element={<Createproduct />} />
+          <Route path="admin/create-product" element={<Createproduct />} />
+          <Route path="/dashboard/admin/product/:slug" element={<Updateproduct />} />
+          <Route path="admin/product" element={<Product />} />
           <Route path="admin/users" element={<Users />} />
 
 
         </Route>
         <Route path="/login" element={<Login/>}></Route>
+        <Route path="/category/:slug" element={<Category/>}></Route>
+        <Route path="/author/:slug" element={<Authorbook/>}></Route>
+        <Route path="/new-arrivals" element={<Newarrival/>}></Route>
         <Route path='/blog' element={<Blog/>}></Route>
         <Route path="*" element={<Notfound/>} />
       </Routes>

@@ -33,7 +33,7 @@ router.delete(
   "/delete-category/:id",
   requireSignIn,
   isAdmin,
-  deleteCategoryCOntroller
+  deleteCategoryCOntroller,
 );
 
 export default router;

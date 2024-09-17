@@ -1,16 +1,18 @@
 import productModel from "../models/productModel.js";
 import fs from "fs";
 import slugify from "slugify";
-
+import categoryModel from '../models/categoryModel.js'; 
 //create product
 export const createProductController = async (req, res) => {
   try {
-    const { name, description, price, category, quantity } = req.fields;
+    const { name,author ,description, price, category, quantity,pagenumber } = req.fields;
     const { photo } = req.files;
     //validation
     switch (true) {
       case !name:
         return res.status(500).send({ error: "Name is Required" });
+        case !author:
+          return res.status(500).send({ error: "Author is Required" });
       case !description:
         return res.status(500).send({ error: "Description is Required" });
       case !price:
@@ -19,6 +21,8 @@ export const createProductController = async (req, res) => {
         return res.status(500).send({ error: "Category is Required" });
       case !quantity:
         return res.status(500).send({ error: "Quantity is Required" });
+        case !pagenumber:
+        return res.status(500).send({ error: "Pagenumber is Required" });
       case !photo:
         return res.status(500).send({ error: "photo  is Required" });
       case photo && photo.size > 1000000:
@@ -135,13 +139,15 @@ export const deleteProductController = async (req, res) => {
 //update product
 export const updateProductController = async (req, res) => {
   try {
-    const { name, description, price, category, quantity, shipping } =
+    const { name,author,description, price, category, quantity ,pagenumber} =
       req.fields;
     const { photo } = req.files;
     //alidation
     switch (true) {
       case !name:
         return res.status(500).send({ error: "Name is Required" });
+      case !author:
+          return res.status(500).send({ error: "Author is Required" });  
       case !description:
         return res.status(500).send({ error: "Description is Required" });
       case !price:
@@ -150,6 +156,9 @@ export const updateProductController = async (req, res) => {
         return res.status(500).send({ error: "Category is Required" });
       case !quantity:
         return res.status(500).send({ error: "Quantity is Required" });
+      case !pagenumber:
+        return res.status(500).send({ error: "pagenumber is Required" });
+       case !photo:
       case photo && photo.size > 1000000:
         return res
           .status(500)
@@ -178,5 +187,77 @@ export const updateProductController = async (req, res) => {
       error,
       message: "Error in Updte product",
     });
+  }
+};
+
+
+
+// Get products by category
+export const getProductsByCategoryController = async (req, res) => {
+
+  const { slug } = req.params;
+
+  try {
+    // Find the category by slug
+    const category = await categoryModel.findOne({ slug });
+    
+    if (!category) {
+      return res.status(404).json({ message: 'Category not found' });
+    }
+
+    // Find products with the category ID
+    const products = await productModel.find({ category: category._id }).populate('category');
+
+    if (products.length === 0) {
+      return res.status(404).json({ message: 'No products found for this category' });
+    }
+
+    // Return the products
+    res.status(200).json({
+      success: true,
+      message: 'Products retrieved successfully',
+      products,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+// get recent products
+export const getRecentProductsController = async (req, res) => {
+  try {
+    const products = await productModel
+      .find({})
+      .populate("category")
+      .limit(15) // Limit to 15 products
+      .sort({ createdAt: -1 }); // Sort by creation date in descending order
+    res.status(200).send({
+      success: true,
+      countTotal: products.length,
+      message: "Recent products",
+      products,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      error,
+      message: "Error in getting recent products",
+    });
+  }
+};
+const convertSlugToAuthorName = (slug) => slug.replace(/-/g, ' ');
+
+// Get Products by Author
+export const getProductsByAuthorController = async (req, res) => {
+  const { slug } = req.params;
+  try {
+    const authorName = convertSlugToAuthorName(slug);
+    const products = await productModel.find({ author: new RegExp(`^${authorName}$`, 'i') }).populate('category');
+    if (products.length === 0) return res.status(404).json({ message: 'No products found for this author' });
+    res.status(200).json({ success: true, message: 'Products retrieved successfully', products });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
   }
 };

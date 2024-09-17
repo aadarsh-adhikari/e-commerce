@@ -24,7 +24,7 @@ const Header = () => {
   };
 
   return (
-    <nav>
+    <nav className="sticky top-0 z-10">
       <div className="flex flex-col md:flex-row justify-evenly flex-wrap items-center font-semibold text-lg md:text-xl bg-black h-14 text-white md:px-4">
         <p className="text-center md:text-left">
           Free shipping, 30-day return or refund guarantee.
