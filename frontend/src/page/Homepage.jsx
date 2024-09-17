@@ -65,7 +65,7 @@ const Homepage = () => {
           Browse by Category
         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mx-4">
           {categories.map((category) => (
             <Link
               to={`/category/${category.slug}`}
@@ -106,7 +106,7 @@ const Homepage = () => {
           <span className="block text-center font-light mb-8">
             Find Your Next Favorite Book Here. Explore Fresh Arrivals!
           </span>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mx-4">
             {displayNewArrivals.map((product) => (
               <Link
                 key={product._id}
@@ -129,7 +129,6 @@ const Homepage = () => {
                     <p className="text-sm text-gray-600 text-center mt-1">
                       By {product.author}
                     </p>
-
                   </Link>
                   <p className="text-xl font-semibold text-center mt-3">
                     Rs.{product.price}
@@ -139,12 +138,14 @@ const Homepage = () => {
             ))}
           </div>
           <div className="text-center mt-4">
-          <Link to="/new-arrivals" className="block text-blue-600 hover:underline">
-  <button className="border-2 border-red-400 hover:border-blue-600 text-red-400 rounded-lg py-2 px-4  hover:text-blue-600 transition-colors duration-300">
-    See All New Arrivals
-  </button>
-</Link>
-
+            <Link
+              to="/new-arrivals"
+              className="block text-blue-600 hover:underline"
+            >
+              <button className="border-2 border-red-400 hover:border-blue-600 text-red-400 rounded-lg py-2 px-4  hover:text-blue-600 transition-colors duration-300">
+                See All New Arrivals
+              </button>
+            </Link>
           </div>
         </div>
         <div className="mt-10 ">
