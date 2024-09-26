@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Layout from "../components/layout/layout";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom"; // Import useParams to get the author's slug from the URL
+import ProductCard from "../components/form/ProductCard";
 
 const Authorbook = () => {
   const { slug } = useParams(); // Get the author's slug from the URL
@@ -29,58 +30,13 @@ const Authorbook = () => {
   // Fetch the books when the component mounts or when the slug changes
   useEffect(() => {
     getBooksByAuthor();
+      window.scrollTo(0, 0);
   }, [slug]);
 
   return (
     <div>
       <Layout>
-        <div className="mt-12">
-          <h4 className="font-bold text-2xl text-center mb-4">
-            Books by {slug}
-          </h4>
-
-          {/* Show a loading message while fetching */}
-          {loading ? (
-            <p className="text-center">Loading...</p>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 m-4">
-              {books.length > 0 ? (
-                books.map((book) => (
-                  <Link
-                    key={book._id}
-                    to={`/product/${book.slug}`}
-                    className="group block p-2 border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow"
-                  >
-                    <div className="relative overflow-hidden rounded-md">
-                      <img
-                        src={`http://localhost:3000/product/product-photo/${book._id}`}
-                        alt={book.name}
-                        className="h-48 w-full group-hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                    <div className="p-4">
-                      <h5 className="text-lg font-semibold text-center">
-                        {book.name}
-                      </h5>
-                      <Link to={`/author/${encodeURIComponent(book.author)}`}>
-                  <p className="text-sm text-gray-600 text-center mt-1">
-                    By {book.author}
-                  </p>
-                  </Link>
-                      <p className="text-xl font-semibold text-center mt-3">
-                        RS.{book.price}
-                      </p>
-                    </div>
-                  </Link>
-                ))
-              ) : (
-                <p className="text-center text-gray-600">
-                  No books available by this author.
-                </p>
-              )}
-            </div>
-          )}
-        </div>
+       <ProductCard productcard={books}/>
       </Layout>
     </div>
   );

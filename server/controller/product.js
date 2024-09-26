@@ -261,3 +261,31 @@ export const getProductsByAuthorController = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+export const getProducBySearchController = async (req, res) => {
+  try {
+    const { keyword } = req.query; // Extract 'keyword' from query params
+
+    if (!keyword || keyword.length < 2) { // Check if keyword exists and is at least 2 characters
+      return res.status(400).json({ message: 'Keyword is required and must be at least 2 characters long' });
+    }
+
+    // Search for products by name or description using the 'keyword'
+    const searchQuery = await productModel.find({
+      $or: [
+        { name: { $regex: keyword, $options: 'i' } },        // Case-insensitive search on name
+        { description: { $regex: keyword, $options: 'i' } }  // Case-insensitive search on description
+      ]
+    }).select('-photo'); // Exclude the photo field
+
+    // Send the search results
+    res.status(200).json({
+      success: true,
+      products: searchQuery, 
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
+

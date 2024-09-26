@@ -19,6 +19,9 @@ import Updateproduct from './page/admin/Updateproduct';
 import Category from './page/Category';
 import Newarrival from './page/Newarrival';
 import Authorbook from './page/Authorbook';
+import Productdetail from './page/Productdetail';
+import Search from './components/layout/Search';
+import CartPage from './page/CartPage';
 const App = () => {
   return (
     <>
@@ -44,7 +47,10 @@ const App = () => {
         <Route path="/category/:slug" element={<Category/>}></Route>
         <Route path="/author/:slug" element={<Authorbook/>}></Route>
         <Route path="/new-arrivals" element={<Newarrival/>}></Route>
+        <Route path="/product/:slug" element={<Productdetail/>}></Route>
+        <Route path="/product/search/" element={<Search/>}></Route>
         <Route path='/blog' element={<Blog/>}></Route>
+        <Route path='/cart' element={<CartPage/>}></Route>
         <Route path="*" element={<Notfound/>} />
       </Routes>
     </>

@@ -6,9 +6,9 @@ import { Helmet } from "react-helmet";
 
 const Layout = ({
   children,
-  title = "Men wears",
-  description = "MERN STACK application for ecommerce site.",
-  keywords = "ecommerce, men wears",
+  title = "Read Nepal",
+  description = "MERN STACK application for book site.",
+  keywords = "Read Nepal, book , Nepali books",
   author = "Aadarsh Adhikari",
 }) => {
   return (
