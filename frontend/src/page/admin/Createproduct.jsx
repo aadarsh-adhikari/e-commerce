@@ -22,13 +22,12 @@ const Createproduct = () => {
   const getallCategory = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:3000/category/get-category"
+        `${import.meta.env.VITE_API_URL}/category/get-category`
       );
       if (data?.success) {
         setCategories(data?.category);
       }
     } catch (error) {
-      console.log(error);
     }
   };
   useEffect(() => {
@@ -49,7 +48,7 @@ const Createproduct = () => {
       productData.append("pagenumber", pagenumber);
       productData.append("shipping", shipping);
       productData.append("photo", photo);
-       const {data} = await axios.post("http://localhost:3000/product/create-product", productData, {
+       const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/product/create-product`, productData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

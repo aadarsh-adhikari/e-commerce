@@ -13,7 +13,6 @@ import albertcamus from "../img/albert-camus.jpeg";
 import morganhousel from "../img/morgan-housel.jpeg";
 import ProductCard from "../components/form/ProductCard";
 const Homepage = () => {
- 
   const [categories, setCategories] = useState([]);
   const [newArrivals, setNewArrivals] = useState([]);
 
@@ -28,13 +27,12 @@ const Homepage = () => {
   const getAllCategories = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:3000/category/get-category"
+        `${import.meta.env.VITE_API_URL}/category/get-category`
       );
       if (data?.success) {
         setCategories(data.category);
       }
     } catch (error) {
-      console.log(error);
     }
   };
 
@@ -42,13 +40,12 @@ const Homepage = () => {
   const getNewArrivals = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:3000/product/recent-products"
+        `${import.meta.env.VITE_API_URL}/product/recent-products`
       );
       if (data?.success) {
         setNewArrivals(data.products);
       }
     } catch (error) {
-      console.log(error);
     }
   };
   const displayNewArrivals = newArrivals.slice(0, 5);
@@ -60,14 +57,14 @@ const Homepage = () => {
 
   return (
     <Layout title="Read Nepal - Homepage">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container lg:mx-auto lg:px-8 lg:py-8">
         <h2 className="text-2xl font-bold text-center mb-6">
           Browse by Category
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mx-4">
           {categories.map((category) => (
-           <div>
+          <div key={category._id}>
                     <Link
               to={`/category/${category.slug}`}
               key={category._id}

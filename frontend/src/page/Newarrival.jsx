@@ -11,14 +11,14 @@ const Newarrival = () => {
 
   const getNewArrivals = async () => {
     try {
+
       const { data } = await axios.get(
-        "http://localhost:3000/product/recent-products"
+        `${import.meta.env.VITE_API_URL}/product/recent-products`
       );
       if (data?.success) {
         setNewArrivals(data.products);
       }
     } catch (error) {
-      console.log(error);
       setError("Failed to load new arrivals");
     } finally {
       setLoading(false);
@@ -28,15 +28,17 @@ const Newarrival = () => {
   useEffect(() => {
     getNewArrivals();
   }, []);
-
   return (
     <div>
       <Layout>
+      <h1 className="text-center text-3xl font-bold mt-3">New Arrivals</h1>
+
         {loading ? (
           <Loader/>
         ) : error ? (
           <div className="text-center text-red-500 p-4">{error}</div>
         ) : (
+          
           <ProductCard productcard={newArrivals} />
         )}
       </Layout>

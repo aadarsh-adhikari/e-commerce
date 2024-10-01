@@ -13,7 +13,7 @@ const Createcatogory = () => {
     e.preventDefault();
     try {
       if(editMode){
-        const { data } = await axios.put(`http://localhost:3000/category/update-category/${currentCategory._id}`, { name });
+        const { data } = await axios.put(`REACT_APP_URL/category/update-category/${currentCategory._id}`, { name });
         if (data.success) {
           SeteditMode(false);
           setCurrentCategory(null);
@@ -24,7 +24,7 @@ const Createcatogory = () => {
       }
       else{
       const { data } = await axios.post(
-        "http://localhost:3000/category/create-category",
+        `${import.meta.env.VITE_API_URL}/category/create-category`,
         { name }
       );
       if (data.success) {
@@ -39,25 +39,23 @@ const Createcatogory = () => {
   const getallCategory = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:3000/category/get-category"
+        `${import.meta.env.VITE_API_URL}/category/get-category`
       );
       if (data?.success) {
         setCategories(data?.category);
       }
     } catch (error) {
-      console.log(error);
     }
   };
   const deleteCategory = async (id) => {
     try {
       const { data } = await axios.delete(
-        `http://localhost:3000/category/delete-category/${id}`
+        `${import.meta.env.VITE_API_URL}/category/delete-category/${id}`
       );
       if (data.success) {
         getallCategory();
       }
     } catch (error) {
-      console.log(error);
     }
   };
   const editCategory =(c)=>{

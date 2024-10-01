@@ -43,7 +43,6 @@ export const createProductController = async (req, res) => {
       products,
     });
   } catch (error) {
-    console.log(error);
     res.status(500).send({
       success: false,
       error,
@@ -68,7 +67,6 @@ export const getProductController = async (req, res) => {
       product,
     })
   } catch (error) {
-    console.log(error);
     res.status(500).send({
       success: false,
       error,
@@ -88,7 +86,6 @@ export const getSingleProduct = async(req,res) =>{
     })
     
   } catch (error) {
-    console.log(error)
     res.status(500).send({
       success:false,
       message:"error in geting product",
@@ -110,7 +107,6 @@ export const getProductPhoto = async(req,res)=>{
     })
    }
   } catch (error) {
-    console.log(error)
     res.status(500).send({
       success:false,
       message:"error getting product photo",
@@ -128,7 +124,6 @@ export const deleteProductController = async (req, res) => {
       message: "Product Deleted successfully",
     });
   } catch (error) {
-    console.log(error);
     res.status(500).send({
       success: false,
       message: "Error while deleting product",
@@ -181,7 +176,6 @@ export const updateProductController = async (req, res) => {
       products,
     });
   } catch (error) {
-    console.log(error);
     res.status(500).send({
       success: false,
       error,
@@ -219,7 +213,6 @@ export const getProductsByCategoryController = async (req, res) => {
       products,
     });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: 'Server error' });
   }
 };
@@ -229,7 +222,7 @@ export const getRecentProductsController = async (req, res) => {
     const products = await productModel
       .find({})
       .populate("category")
-      .limit(15) // Limit to 15 products
+      .limit(15) 
       .sort({ createdAt: -1 }); // Sort by creation date in descending order
     res.status(200).send({
       success: true,
@@ -238,7 +231,6 @@ export const getRecentProductsController = async (req, res) => {
       products,
     });
   } catch (error) {
-    console.log(error);
     res.status(500).send({
       success: false,
       error,
@@ -257,33 +249,30 @@ export const getProductsByAuthorController = async (req, res) => {
     if (products.length === 0) return res.status(404).json({ message: 'No products found for this author' });
     res.status(200).json({ success: true, message: 'Products retrieved successfully', products });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: 'Server error' });
   }
 };
 export const getProducBySearchController = async (req, res) => {
   try {
-    const { keyword } = req.query; // Extract 'keyword' from query params
+    const { keyword } = req.query; 
 
-    if (!keyword || keyword.length < 2) { // Check if keyword exists and is at least 2 characters
+    if (!keyword || keyword.length < 2) {
       return res.status(400).json({ message: 'Keyword is required and must be at least 2 characters long' });
     }
 
-    // Search for products by name or description using the 'keyword'
+   
     const searchQuery = await productModel.find({
       $or: [
-        { name: { $regex: keyword, $options: 'i' } },        // Case-insensitive search on name
-        { description: { $regex: keyword, $options: 'i' } }  // Case-insensitive search on description
+        { name: { $regex: keyword, $options: 'i' } },      
+        { description: { $regex: keyword, $options: 'i' } }
       ]
-    }).select('-photo'); // Exclude the photo field
+    }).select('-photo'); 
 
-    // Send the search results
     res.status(200).json({
       success: true,
       products: searchQuery, 
     });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };

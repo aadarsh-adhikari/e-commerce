@@ -7,9 +7,14 @@ export default {
   theme: {
     extend: {
       animation: {
-        'spin-medium': 'spin 2s linear infinite', // Custom medium spin animation
+        'spin-medium': 'spin 2s linear infinite',
       },
     },
+    screens: {
+      'sm': '576px',
+      'md': '960px',
+      'lg': '1440px',
     },
+  },
   plugins: [],
 }

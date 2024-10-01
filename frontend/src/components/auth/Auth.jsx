@@ -11,7 +11,7 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     // Set default headers when the component mounts or `auth.token` changes
-    axios.defaults.headers.common["Authorization"] = `Bearer ${auth.token}`;
+  axios.defaults.headers.common["Authorization"] = `Bearer ${auth.token}`;
 
     // Load auth data from localStorage
     const data = localStorage.getItem("auth");

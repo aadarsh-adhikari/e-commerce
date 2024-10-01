@@ -1,41 +1,37 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../components/layout/layout";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom"; // Import useParams to get the author's slug from the URL
+import { Link, useParams } from "react-router-dom"; 
 import ProductCard from "../components/form/ProductCard";
 
 const Authorbook = () => {
-  const { slug } = useParams(); // Get the author's slug from the URL
-  const [books, setBooks] = useState([]); // State to store the list of books
-  const [loading, setLoading] = useState(true); // Loading state to show while data is being fetched
-
-  // Function to fetch books by the author
+  const { slug } = useParams(); 
+  const [books, setBooks] = useState([]); 
   const getBooksByAuthor = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:3000/product/author/${slug}`
+        `${import.meta.env.VITE_API_URL}/product/author/${slug}`
       );
       if (data?.success) {
-        setBooks(data.products); // Set the books in the state
+        setBooks(data.products);
       } else {
-        setBooks([]); // If no success, set an empty array
+        setBooks([]); 
       }
     } catch (error) {
-      console.log("Error fetching books by author:", error);
-    } finally {
-      setLoading(false); // Stop the loading spinner
-    }
+    } 
   };
 
-  // Fetch the books when the component mounts or when the slug changes
   useEffect(() => {
     getBooksByAuthor();
       window.scrollTo(0, 0);
   }, [slug]);
+  const author = slug.replace(/-/g, ' ');
 
   return (
     <div>
       <Layout>
+      <h1 className="text-center text-2xl font-bold my-2">Books by {author}</h1>
+      <p className="text-center text-xl">{books.length} result found</p>
        <ProductCard productcard={books}/>
       </Layout>
     </div>

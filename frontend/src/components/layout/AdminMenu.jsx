@@ -26,12 +26,7 @@ const AdminMenu = () => {
         >
         Manage Products
         </NavLink>
-        <NavLink
-          to="/dashboard/admin/users"
-          className="block py-2 px-4 text-sm hover:bg-gray-700"
-        >
-          Manage Users
-        </NavLink>
+     
       </nav>
     </div>
   );

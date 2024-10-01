@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '../components/layout/layout';
 import axios from 'axios';
-import { useParams } from 'react-router-dom'; // Import Link for routing
+import { useParams } from 'react-router-dom'; 
 import Loader from '../components/Loader';
 import ProductCard from '../components/form/ProductCard';
 
@@ -13,10 +13,10 @@ const Category = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/product/products/category/${slug}`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/product/products/category/${slug}`);
         setData(response.data.products); 
       } catch (err) {
-        console.error("Error fetching category products", err);
+      
       } finally {
         setLoading(false);
       }
@@ -31,8 +31,9 @@ const Category = () => {
   return (
     <div>
       <Layout>
-        <h1 className="text-center text-3xl font-bold mb-6">Products in Category: {categoryTitle}</h1>
-          <ProductCard productcard={data}/>
+        <h1 className="text-center text-2xl font-bold my-2">Products in Category: {categoryTitle}</h1>
+        <p className="text-center text-xl">{data.length} result found</p>
+          <ProductCard productcard={data} />
       </Layout>
     </div>
   );

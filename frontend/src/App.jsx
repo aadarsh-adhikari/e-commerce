@@ -11,9 +11,7 @@ import Admin from './components/routes/Admin';
 import Admindashboard from './page/admin/Admindashboard';
 import Createcatogory from './page/admin/Createcatogory';
 import Createproduct from './page/admin/Createproduct';
-import Users from './page/admin/Users';
 import Profile from './page/user/Profile';
-import Orders from './page/user/Orders';
 import Product from './page/admin/Product';
 import Updateproduct from './page/admin/Updateproduct';
 import Category from './page/Category';
@@ -31,7 +29,6 @@ const App = () => {
         <Route path="/dashboard" element={<PrivateRoute />}>
           <Route path="user" element={<Dashboard />} />
           <Route path="user/profile" element={<Profile />} />
-          <Route path="user/order" element={<Orders />} />          
         </Route>
         <Route path="/dashboard" element={<Admin />}>
           <Route path="admin" element={<Admindashboard />} />
@@ -39,7 +36,6 @@ const App = () => {
           <Route path="admin/create-product" element={<Createproduct />} />
           <Route path="/dashboard/admin/product/:slug" element={<Updateproduct />} />
           <Route path="admin/product" element={<Product />} />
-          <Route path="admin/users" element={<Users />} />
 
 
         </Route>

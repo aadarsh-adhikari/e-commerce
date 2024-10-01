@@ -15,7 +15,7 @@ const Usermenu = () => {
         Profile
       </NavLink>
       <NavLink
-        to="/dashboard/user/order"
+        to="/cart"
         className="block py-2 px-4 text-sm hover:bg-gray-700"
       >
         Orders

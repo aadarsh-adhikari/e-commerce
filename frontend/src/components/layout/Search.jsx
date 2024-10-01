@@ -11,13 +11,12 @@ function Search() {
   const getSearchProduct = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:3000/product/search?keyword=${keyword}`
+        `${import.meta.env.VITE_API_URL}/product/search?keyword=${keyword}`
       );
       if (data?.success) {
         setData(data.products);
       }
     } catch (error) {
-      console.log(error);
     }
   };
 

@@ -11,13 +11,12 @@ const Product = () => {
   const getallProduct = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:3000/product/get-product"
+        `${import.meta.env.VITE_API_URL}/product/get-product`
       );
       if (data.success) {
         setProduct(data.product);
       }
     } catch (error) {
-      console.log(error);
     }
   };
 
@@ -43,7 +42,7 @@ const Product = () => {
                   <div className="relative overflow-hidden rounded-t-lg border-2 border-black-200">
                     <img
                       className="h-64 w-full  group-hover:scale-110 transition-transform duration-300 "
-                      src={`http://localhost:3000/product/product-photo/${p._id}`}
+                      src={`${import.meta.env.VITE_API_URL}/product/product-photo/${p._id}`}
                       alt={p.name}
                     />
                   </div>

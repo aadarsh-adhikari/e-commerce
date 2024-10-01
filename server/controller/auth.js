@@ -39,7 +39,6 @@ export const registerController = async (req, res) => {
       user,
     });
   } catch (err) {
-    console.error(err);
     res.status(500).send({
       success: false,
       message: "error in register",
@@ -87,7 +86,6 @@ export const loginController = async (req, res) => {
       token,
     });
   } catch (error) {
-    console.error("Error during process:", error);
     res.status(500).send({
       success: false,
       message: "error in login",

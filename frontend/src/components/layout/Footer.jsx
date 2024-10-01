@@ -4,9 +4,9 @@ import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-white py-8">
+    <footer className="bg-gray-900 text-white py-8">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* About Section */}
           <div>
             <h3 className="text-lg font-semibold mb-4">About Us</h3>
@@ -14,8 +14,6 @@ const Footer = () => {
               We are a bookstore dedicated to bringing you the best selection of books. Explore our collection of new arrivals, bestsellers, and more.
             </p>
           </div>
-
-          {/* Links Section */}
           <div>
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul>
@@ -36,12 +34,31 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+            <ul>
+              <li>
+                <Link to="/" className="text-gray-400 hover:text-white">Home</Link>
+              </li>
+              <li>
+                <Link to="/category/business-and-investing" className="text-gray-400 hover:text-white">Business and investing </Link>
+              </li>
+              <li>
+                <Link to="/category/fiction-and-literature" className="text-gray-400 hover:text-white">Friction and Literature</Link>
+              </li>
+              <li>
+                <Link to="/category/manga-and-comics" className="text-gray-400 hover:text-white">Manga and Comics</Link>
+              </li>
+              <li>
+                <Link to="/category/nepali" className="text-gray-400 hover:text-white">Nepali</Link>
+              </li>
+            </ul>
+          </div>
           {/* Contact Section */}
           <div>
             <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
-            <p className="text-gray-400">123 Book Street, Book City, BK 12345</p>
-            <p className="text-gray-400">Email: support@bookstore.com</p>
+            <p className="text-gray-400">BooksNepal, mechinager, Jhapa, Nepal</p>
+            <p className="text-gray-400">Email: support@booksnepal.com</p>
             <p className="text-gray-400">Phone: (123) 456-7890</p>
           </div>
         </div>
@@ -64,7 +81,7 @@ const Footer = () => {
 
         {/* Footer Bottom */}
         <div className="mt-8 border-t border-gray-700 pt-4 text-center text-gray-400">
-          <p>&copy; {new Date().getFullYear()} Bookstore. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} BooksNepal. All rights reserved.</p>
         </div>
       </div>
     </footer>

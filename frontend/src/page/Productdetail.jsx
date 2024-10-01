@@ -12,7 +12,7 @@ const ProductDetail = () => {
 
   const getSingleProduct = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/product/get-product/${slug}`);
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/product/get-product/${slug}`);
       if (response.data?.success) {
         setData(response.data.product);
       }
@@ -42,7 +42,7 @@ const ProductDetail = () => {
             <div className="md:w-1/2 w-full">
               <div className="flex justify-center items-center h-full">
                 <img
-                  src={`http://localhost:3000/product/product-photo/${data._id}`}
+                  src={`${import.meta.env.VITE_API_URL}/product/product-photo/${data._id}`}
                   className="h-80 w-full md:h-80 md:w-1/2 transition-transform duration-300 hover:scale-105 rounded-lg select-none"
                   alt={data.name}
                 />
@@ -57,7 +57,6 @@ const ProductDetail = () => {
               </Link>
               <p className="font-semibold">Rs. {data.price}</p>
               <div className="space-x-3 mt-2">
-                <button className="p-2 bg-yellow-300 hover:bg-yellow-400 rounded-md">Buy Now</button>
                 <CartButton item={data} cartStyle="p-2 bg-yellow-300 hover:bg-yellow-400 rounded-md" />
               </div>
             </div>

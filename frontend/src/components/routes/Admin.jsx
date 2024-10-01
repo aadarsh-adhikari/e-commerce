@@ -11,7 +11,7 @@ export default function AdminRoute() {
   useEffect(() => {
     const authCheck = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/auth/admin-auth", {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/auth/admin-auth`, {
           headers: {
             Authorization: `Bearer ${auth?.token}`,
           },

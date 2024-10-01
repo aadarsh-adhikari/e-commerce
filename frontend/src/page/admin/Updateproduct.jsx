@@ -25,7 +25,7 @@ const Updateproduct = () => {
     const getsingleproduct = async()=>{
       try {    
         const { data } = await axios.get(
-          `http://localhost:3000/product/get-product/${params.slug}`
+          `${import.meta.env.VITE_API_URL}/product/get-product/${params.slug}`
         );
         setName(data.product.name)
         setAuthor(data.product.author)
@@ -38,7 +38,6 @@ const Updateproduct = () => {
 
       
       } catch (error) {
-        console.log(error)
       }
     }
     useEffect(()=>{
@@ -47,13 +46,12 @@ const Updateproduct = () => {
     const getallCategory = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:3000/category/get-category"
+          `${import.meta.env.VITE_API_URL}/category/get-category`
         );
         if (data?.success) {
           setCategories(data?.category);
         }
       } catch (error) {
-        console.log(error);
       }
     };
     useEffect(() => {
@@ -74,21 +72,16 @@ const Updateproduct = () => {
         productData.append("pagenumber", pagenumber);
         productData.append("shipping", shipping === "1")
         photo && productData.append("photo", photo);
-        const {data} = await axios.put(`http://localhost:3000/product/update-product/${id}`, productData, {
+        const {data} = await axios.put(`${import.meta.env.VITE_API_URL}/product/update-product/${id}`, productData, {
            headers: {
             "Content-Type": "multipart/form-data",
           },
         });
          if(data.success){
-          console.log("updated product")
           navigate("/dashboard/admin/product")
          }
-         if (!data.success) {
-          console.log("Error:", data.message || "Unknown error occurred");
-        }
-        
+      
       } catch (error) {
-        console.log(error)
         }
     }
     //delete product
@@ -97,16 +90,13 @@ const Updateproduct = () => {
        if(window.confirm("are you sure? you want to delete this product"))
       {
            const { data } = await axios.delete(
-          `http://localhost:3000/product/delete-product/${id}`
+          `${import.meta.env.VITE_API_URL}/product/delete-product/${id}`
         );
      if(data.success){
-      console.log("deleted product")
       navigate("/dashboard/admin/product")
      }
       }
-  
       } catch (error) {
-        console.log(error);
       }
     };
     return (
@@ -158,7 +148,7 @@ const Updateproduct = () => {
           ): 
           <div className="mb-3 ">
           <img
-            src={`http://localhost:3000/product/product-photo/${id}`}
+            src={`${import.meta.env.VITE_API_URL}/product/product-photo/${id}`}
             alt="product_photo"
             className="object-fit: scale-down; h-48 w-96"
           />

@@ -7,7 +7,6 @@ export const requireSignIn = async (req, res, next) => {
     req.user = decode;
     next();
   } catch (error) {
-    console.error("Token Verification Error:", error);
     res.status(401).json({ message: "Invalid or expired token" });
   }
 };
@@ -25,6 +24,5 @@ export const isAdmin = async (req, res, next) => {
       next();
     }
   } catch (error) {
-    console.error(error);
   }
 };
